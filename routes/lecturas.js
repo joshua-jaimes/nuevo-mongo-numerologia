@@ -2,7 +2,7 @@ import { Router } from "express";
 import { getLecturas, getLecturasId, postLecturas, putLecturas, deleteLecturas } from "../controllers/lecturas.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { check } from "express-validator";
-import { validarEmail, validarExisteUsuario } from "../helpers/usuarios.js";
+
 
 const router = new Router()
 

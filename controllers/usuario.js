@@ -28,7 +28,7 @@ const postUsuario=async(req,res)=>{
             edad,
             fechanacimiento,
             email,
-            estado: 0 // 👈 SIEMPRE inactivo al crear
+            estado: 0 
         })
 
         await usuario.save()

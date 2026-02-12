@@ -4,7 +4,7 @@ const lectura = new mongoose.Schema({
     usuario_id:{type:mongoose.Schema.Types.ObjectId,ref:"Usuario", required:true},
     tipo:{type:String, required:true, enum:['principal', 'diaria']},
 
-    // 👇 ESTE ES EL CAMPO CLAVE
+    
     dia:{type:String, index:true},
 
     contenido:{type:String, required:true},

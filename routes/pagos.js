@@ -2,7 +2,7 @@ import { Router } from "express";
 import { getPagos, getPagosId, putPagosId, postPagosId, deletePagos } from "../controllers/pagos.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { check } from "express-validator";
-import { validarEmail, validarExisteUsuario } from "../helpers/usuarios.js";
+
 
 
 

@@ -1,9 +1,9 @@
 
-// controllers/lecturas.js
+
 import Lectura from "../models/lecturas.js"
 import Usuario from "../models/usuario.js"
 import Pago from "../models/pagos.js"
-// import { generarLecturaGemini } from "../helpers/lecturas.js"
+
 const getLecturas = async (req, res) => {
   try {
     const lecturas = await Lectura.find()
@@ -32,14 +32,14 @@ const postLecturas = async (req, res) => {
 
     const { usuario_id, tipo } = req.body;
 
-    // Verificar que el usuario existe
+   
     const usuario = await Usuario.findById(usuario_id);
     if (!usuario) {
       return res.status(404).json({ msg: "Usuario no encontrado" });
     }
 
 
-    // 🔒 Verificar si el usuario está activo
+    
 if (usuario.estado === 0) {
   return res.status(403).json({
     msg: "Tu cuenta está inactiva. Contacta con soporte."
@@ -48,7 +48,7 @@ if (usuario.estado === 0) {
 
 
 
-    // Validaciones según el tipo de lectura
+    
     if (tipo === "principal") {
       const lecturaExistente = await Lectura.findOne({
         usuario_id,
@@ -61,14 +61,14 @@ if (usuario.estado === 0) {
       }
     }  else if (tipo === "diaria") {
 
-  // 🔒 Solo usuarios activos
+  
   if (usuario.estado !== 1) {
     return res.status(403).json({
       msg: "Solo los usuarios activos pueden generar lecturas diarias"
     });
   }
 
-  // 🔒 Verificar pago vigente
+  
   const pagoActivo = await Pago.findOne({
     usuario_id,
     fecha_vencimiento: { $gte: new Date() },
@@ -80,7 +80,7 @@ if (usuario.estado === 0) {
     });
   }
 
- // ⏰ Ajuste a UTC-5 (Colombia) para que coincida con createdAt en Mongo
+
 const hoyInicio = new Date();
 hoyInicio.setUTCHours(5, 0, 0, 0);
 
@@ -124,7 +124,7 @@ hoyFin.setUTCHours(28, 59, 59, 999);
       return res.status(500).json({ msg: "API Key no configurada" });
     }
 
-// 🗓️ Paso 2: día lógico en hora Colombia (CLAVE)
+
 const diaHoy = new Date().toLocaleDateString("en-CA", {
   timeZone: "America/Bogota"
 });
@@ -191,15 +191,13 @@ Inicia el texto mencionando claramente la fecha de hoy: ${hoy}.
 
     console.log("📝 Enviando petición a Gemini (Axios v1beta)...");
 
-    // Usamos v1beta y gemini-1.5-flash como solicitó el usuario
-    // Usamos gemini-2.0-flash ya que 1.5-flash no está disponible (404)
-    // Nota: Si da 429 es por límite de quota, pero el modelo EXISTE.
+    
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
-    // Validar axios import
+   
     const axios = (await import("axios")).default;
 
-    // Función de retry simple con backoff
+   
     const makeRequest = async (retries = 3, delay = 1000) => {
       try {
         return await axios.post(

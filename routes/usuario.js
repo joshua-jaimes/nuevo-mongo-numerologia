@@ -6,7 +6,7 @@ import { validarEmail, validarExisteUsuario } from "../helpers/usuarios.js";
 
 const router = new Router()
 
-// GET
+
 router.get("/email", [
     check('email').not().isEmpty(),
     check('email', "No es un email valido").isEmail(),
@@ -15,7 +15,7 @@ router.get("/email", [
 
 router.get("/", getUsuario)
 
-// POST
+
 router.post("/", [
     check('nombre').not().isEmpty().isLength({min:3,max:50}),
     check('Apellido').not().isAlpha('es-ES', {ignore: ' '}),
@@ -26,7 +26,7 @@ router.post("/", [
     validarCampos
 ], postUsuario)
 
-// PUT
+
 router.put("/activar/:id", putUsuarioActivar)
 
 router.put("/inactivar/:id", putUsuarioInactivar)
@@ -38,7 +38,7 @@ router.put("/:id", [
     validarCampos
 ], putUsuario)
 
-// DELETE
+
 router.delete("/:id", deleteUsuario)
 
 

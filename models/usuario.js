@@ -5,7 +5,7 @@ const usuario = new mongoose.Schema({
     edad:{type:Number},
     fechanacimiento:{type:Date, default:Date.now},
     email:{type:String,unique:true},
-    estado:{type:Number,default:1}//0 inactivo   1 activo
+    estado:{type:Number,default:1}
 });
 
 export default mongoose.model("Usuario",usuario)

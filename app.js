@@ -5,7 +5,7 @@ import { conectarMongo } from "./database/cnx-mongo.js"
 import usuarioRoute from "./routes/usuario.js"
 import lecturasRoute from "./routes/lecturas.js"
 import pagosRoute from "./routes/pagos.js"
-import { check } from 'express-validator';
+
 
 const app = express()
 conectarMongo()
